@@ -1,16 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="blanket.css">
+    <link rel="stylesheet" type="text/css" href="../static/blanket.css">
+    <link rel="stylesheet" th:href="@{/blanket.css}"/>
     <title>Ansøgning om dagpenge under arbejdssøgning i et andet EØS-land</title>
 </head>
 <body>
 <div class="page-container">
     <div class="container">
+        <div id="cookies-div" class="cookies">
+            <h3 id="cookies-heading" style="text-align: center">
+                We're using cookies and selling your private data to third parties.
+                If you want to continue using our services, click "I agree" below, or
+                "I don't agree" if you refuse to share personal data with us.
+            </h3>
+            <button id="btnYes" class="yes" onclick="hideCookies()">I agree</button>
+            <button id="btnNo" class="no" onclick="hideCookies()">I don't agree</button>
+            <script type="application/javascript">
+                function hideCookies() {
+                    var x = document.getElementById("cookies-div");
+                    if (x.style.display === "none") {
+                        x.style.display = "block";
+                    } else {
+                        x.style.display = "none";
+                    }
+                }
+            </script>
+        </div>
         <div class="head-container">
             <div class="display-element display-element--left">
-                <h4>Husk at læse vejledningen <a href="vejledning.html">her</a>, før du udfylder blanketten</h4>
+                <h4>Husk at læse vejledningen <a href="/vejledning">her</a>, før du udfylder blanketten</h4>
             </div>
             <div class="display-element display-element--right">
                 <h2>Ansøgning om dagpenge under arbejdssøgning i et andet EØS-land</h2>
@@ -19,38 +39,46 @@
             </div>
         </div>
         <h3>Ansøgerens oplysninger</h3>
-        <form>
+        <form action="#" th:action="@{/}" th:object="${blanketInfo}" method="post">
             <div class="first-line">
                 <div class="form-element">
-                Navn:<input type="text" name="Navn">
+                    Navn:<input type="text" th:field="*{navn}">
+                    <div th:if="${#fields.hasErrors('navn')}" th:errors="*{navn}">Name Error</div>
                 </div>
                 <div class="form-element">
-                    CPR-nummer:<input type="text" name="CPR-nummer">
+                    CPR-nummer:<input type="text" th:field="*{cpr}">
+                    <div th:if="${#fields.hasErrors('cpr')}" th:errors="*{cpr}">cpr Error</div>
                 </div>
             </div>
-            <div class="second-line">
+            <div class="line">
                 <div class="form-element">
-                    Adresse i Danmark:<input type="text" name="Adresse i Danmark">
+                    Adresse i Danmark:<input type="text" th:field="*{adresse}">
+                    <div th:if="${#fields.hasErrors('adresse')}" th:errors="*{adresse}">adresse Error</div>
                 </div>
                 <div class="form-element">
-                    Statsborgerskab:<input type="text" name="Statsborgerskab">
-                </div>
-            </div>
-            <div class="third-line">
-                <div class="form-element">
-                    Postnr.:<input type="text" name="Postnr.">
-                </div>
-                <div class="form-element">
-                    By:<input type="text" name="By">
-                </div>
-                <div class="form-element">
-                    Telefonnr.:<input type="text" name="Telefonnr.">
-                </div>
-                <div class="form-element">
-                    E-mail:<input type="text" name="E-mail">
+                    Statsborgerskab:<input type="text" th:field="*{statsborgerskab}">
+                    <div th:if="${#fields.hasErrors('statsborgerskab')}" th:errors="*{statsborgerskab}">statsborgerskab Error</div>
                 </div>
             </div>
-            <div class="fourth-line">
+            <div class="line">
+                <div class="form-element">
+                    Postnr.:<input type="text" th:field="*{postnr}">
+                    <div th:if="${#fields.hasErrors('postnr')}" th:errors="*{postnr}">postnr Error</div>
+                </div>
+                <div class="form-element">
+                    By:<input type="text" th:field="*{by}">
+                    <div th:if="${#fields.hasErrors('by')}" th:errors="*{by}">by Error</div>
+                </div>
+                <div class="form-element">
+                    Telefonnr.:<input type="text" th:field="*{telefon}">
+                    <div th:if="${#fields.hasErrors('telefon')}" th:errors="*{telefon}">telefon Error</div>
+                </div>
+                <div class="form-element">
+                    E-mail:<input type="text" th:field="*{email}">
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</div>
+                </div>
+            </div>
+            <div class="line">
                 <div style="background-color: yellow" class="form-element">
                     Hvilet EØS-land ønsker du at søge arbejde i?
                 </div>
@@ -64,7 +92,7 @@
                     Dato:<input type="text" name="Dato">
                 </div>
             </div>
-            <div class="fifth-line">
+            <div class="line">
                 <div class="form-element" style="background-color: yellow">
                     Har du tidligere fået dagpenge under arbejdssøgning i udlandet?
                 </div>
@@ -72,12 +100,12 @@
                     Ja<input type="checkbox" name="Ja">&nbsp;Nej<input type="checkbox" name="Nej">
                 </div>
             </div>
-            <div class="sixth-line">
+            <div class="line">
                 <div class="form-element">
                     Adresse i det andet EØS-land (hvis kendt):<input type="text" name="Adresse i det andet EØS-land (hvis kendt)">
                 </div>
             </div>
-            <div class="seventh-line">
+            <div class="line">
                 <div class="form-element">
                     Postnr.:<input type="text" name="Postnr.">
                 </div>
@@ -88,12 +116,12 @@
                     Telefonnr.:<input type="text" name="Telefonnr.">
                 </div>
             </div>
-            <div class="eighth-line">
+            <div class="line">
                 <div class="form-element">
                     Seneste arbejdsgivers navn:<input type="text" name="Seneste arbejdsgivers navn">
                 </div>
             </div>
-            <div class="ninth-line">
+            <div class="line">
                 <div class="form-element">
                     Adresse:<input type="text" name="Adresse">
                 </div>
@@ -104,7 +132,7 @@
                     By:<input type="text" name="By">
                 </div>
             </div>
-            <div class="tenth-line">
+            <div class="line">
                 <div style="background-color: yellow" class="form-element">
                     Arbejdsperiode
                 </div>
@@ -128,7 +156,7 @@
                     Ja<input type="checkbox" name="Ja">&nbsp;Nej<input type="checkbox" name="Nej">
                 </div>
             </div>
-            <div class="eleventh-line">
+            <div class="line">
                 <div style="background-color: yellow" class="form-element">
                     Har du selv sagt op?
                 </div>
@@ -139,7 +167,7 @@
                     Årsag til arbejdsophør?:<input type="text" name="Årsag til arbejdsophør?">
                 </div>
             </div>
-            <div class="twelfth-line">
+            <div class="line">
                 <div class="form-element">
                     Skriv dine eventuelle bemærkninger:<input type="text" name="Skriv dine eventuelle bemærkninger">
                 </div>
@@ -153,7 +181,7 @@
                     Oplys straks a-kassen om alt, der har betydning for udstedelse af dokumentet.
                 </div>
             </div>
-            <div class="fourteenth-line">
+            <div class="line">
                 <div class="form-element">
                     <img src="husk.png" alt="Husk">
                 </div>
@@ -164,7 +192,9 @@
                     Underskrift:<input type="text" name="Underskrift">
                 </div>
             </div>
+            <input type="submit" value="submit">
         </form>
+
         <h4 style="text-align: center">
             Ansøgningen og eventuel dokumentation sendes til din a-kasse.
             <br><br>

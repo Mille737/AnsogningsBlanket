@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+}
+
+.page-container {
+    background-color: rgb(83,86,89);
+    padding: 30px 0;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 15px 50px;
+    background-color: white;
+}
+
+.flex-container {
+    display: flex;
+}
+.display-element {
+    flex: 1;
+    padding: 15px;
+}
+
+.center-heading {
+    text-align: center;
+}
+
+.footer {
+    text-align: left;
+    font-size: 10px;
+}
+
+.page-break {
+    background-color: rgb(83,86,89);
+    width: 800px;
+    height: 10px;
+}
+
+.space {
+    height: 10px;
+}
